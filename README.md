@@ -1,5 +1,5 @@
 # roberto.github.io
-Roberto misc hosting
+Static version of the excellent minitel simulator from minipavi.fr and Zigazou (https://github.com/Zigazou)
 
 ---
 
