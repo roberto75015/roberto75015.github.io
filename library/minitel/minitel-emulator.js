@@ -32,7 +32,7 @@ Minitel.Emulator = class {
                 .add('cursor')
                 .add('keyboard')
                 .add('beep')
-				.add('minipaviwebmedia')
+				//BOB//.add('minipaviwebmedia')
                 .foundIn(container)
 
         // The screen canvas is the only mandatory element
@@ -41,7 +41,7 @@ Minitel.Emulator = class {
             return
         }
 		
-		if (queryParameters("nowebmedia") !== undefined)
+		//BOB//if (queryParameters("nowebmedia") !== undefined)
 			elements.minipaviwebmedia = undefined;
 		
 		if (elements.minipaviwebmedia === undefined) {
