@@ -351,7 +351,7 @@ Minitel.Decoder = class extends Minitel.Protocol {
 
         if(clearRange === "endofscreen") {
             // Clear from the current cursor position till the end of the screen
-            this.vdu.cursor.cursorToEndOfScreen((x, y) => {
+            this.vdu.cursorToEndOfScreen((x, y) => {
                 this.vdu.set(x, y, new Minitel.MosaicCell())
             })
 
@@ -414,31 +414,6 @@ Minitel.Decoder = class extends Minitel.Protocol {
             this.bip.play()
         }
     }
-
-    getVersion() {
-		if(this.sender !== null) {
-			this.sender(["\x01EmU\x04"]);
-		}
-    }
-
-//sp@
-	setSpeed(speed) {
-		this.keyboard.selectSpeed(speed)
-		var color = this.keyboard.pageConfig.querySelector('.config-color>select').value;
-        this.keyboard.config({
-            speed: speed === "FULL" ? 0 : parseInt(speed),
-			color: color === "true"
-        })		
-	}
-	setColor(color) {
-		this.keyboard.selectColor(color)
-		var speed = this.keyboard.pageConfig.querySelector('.config-speed>select').value
-        this.keyboard.config({
-            speed: speed === "FULL" ? 0 : parseInt(speed),
-			color: color 
-        })		
-	}
-
 
     /**
      * Set the uppercase mode of the keyboard

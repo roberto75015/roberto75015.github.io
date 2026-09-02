@@ -97,10 +97,6 @@ Minitel.Keyboard = class {
         this.config = undefined
         this.setConfig(config)
 
-		this.save = false;
-		this.paused = false;
-		this.saveArr = []
-		
         // Look for all elements
         const elements = new Minitel.Elements()
         elements.add('keyalpha')
@@ -141,35 +137,9 @@ Minitel.Keyboard = class {
 
         // Install events listener
         document.addEventListener("keyup", event => this.onkeyup(event))
-        document.addEventListener("keydown", event => this.onkeypress(event))
+        document.addEventListener("keypress", event => this.onkeypress(event))
         container.autocallback(this)
     }
-
-download() {
-	var binString='';
-    var pom = document.createElement('a');
-    //pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(this.saveArr));
-	
-    range(this.saveArr.length).forEach(i =>
-       binString+=String.fromCharCode(this.saveArr[i])
-    )
-	
-	
-	//pom.setAttribute('href', 'data:application/octet-stream,' + binString);
-	pom.setAttribute('href', 'data:application/octet-stream,' + encodeURIComponent(binString));
-    pom.setAttribute('download', 'page.vdt');
-
-    if (document.createEvent) {
-        var event = document.createEvent('MouseEvents');
-        event.initEvent('click', true, true);
-        pom.dispatchEvent(event);
-    }
-    else {
-        pom.click();
-    }
-}
-
-
 
     /**
      * Defines an EmitterHandler which will be called everytime a key is
@@ -215,7 +185,6 @@ download() {
         this.pageConfig.querySelector('.config-color>select').value = color
     }
 
-	
     /**
      * Handles settings changes.
      * @param {HTMLEvent} event
@@ -296,28 +265,6 @@ download() {
             this.kShift = !this.kShift
         }
 
-		if (param === "Sauve") {
-			this.save = !this.save;
-			if (this.save) {
-				event.target.innerText = 'Arrêt enr.';			
-			} else { 
-				event.target.innerText = 'Début enr.';			
-				this.download();
-				this.saveArr = [];
-			}
-		}
-		if (param === "Pause") {
-			this.paused = !this.paused;
-			if (this.paused) {
-				event.target.innerText = '⏵';			
-			} else { 
-				event.target.innerText = '⏸';			
-			}
-		}
-		
-		if (param === "Espace") {
-			this.keypress(this.toMinitel(' '));
-		}
         this.keypress(this.toMinitel(param))
     }
 
@@ -364,7 +311,6 @@ download() {
                 key = key.toLowerCase()
             }
         } else {
-			
             if(key in Minitel.pcToMinitelKeys) {
                 key = Minitel.pcToMinitelKeys[key]
             }

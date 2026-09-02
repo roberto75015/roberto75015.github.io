@@ -332,7 +332,6 @@ Minitel.keys = {
         "Sommaire": [0x13, 0x46],
         "Correction": [0x13, 0x47],
         "Suite": [0x13, 0x48],
-		"Connexion": [0x13, 0x49],
 
         "Haut": [0x1B, 0x5B, 0x41],
         "MajHaut": [0x1B, 0x5B, 0x4D],
@@ -827,20 +826,10 @@ Minitel.states =  {
         0x4b: { func: "clear", arg: "completeline" }
     },
 
-    /*"pro1": { "*": { notImplemented: "pro1Sequence" } },*/
-	
-    "pro1": {
-        0x7B: { func: "getVersion" },
-		"*": { notImplemented: "pro1Sequence" }
-    },
-
-	
-	//sp@
+    "pro1": { "*": { notImplemented: "pro1Sequence" } },
     "pro2": {
         0x69: { goto: "startFunction" },
-        0x6A: { goto: "stopFunction" },
-		0x10: { goto: "startSpeed"},
-		0x11: { goto: "startColor"},		
+        0x6A: { goto: "stopFunction" }
     },
 
     "startFunction": {
@@ -856,19 +845,6 @@ Minitel.states =  {
         0x46: { notImplemented: "stopUpZoom" },
         0x47: { notImplemented: "stopDownZoom" }
     },
-	
-	//sp@
-    "startSpeed": {
-		0x41: {func: "setSpeed", arg: "1200"},
-		0x42: {func: "setSpeed", arg: "4800"},
-		0x43: {func: "setSpeed", arg: "9600"},
-		0x44: {func: "setSpeed", arg: "FULL"}
-	},
-
-    "startColor": {
-		0x41: {func: "setColor", arg: false},
-		0x42: {func: "setColor", arg: true}
-	},
 
     "pro3": {
         0x60: { goto: "pro3SwitchOff" },

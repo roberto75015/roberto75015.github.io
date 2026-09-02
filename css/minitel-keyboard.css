@@ -30,11 +30,6 @@ canvas {
     pointer-events: none
 }
 
-.minitel-screen {
-	pointer-events: auto;
-	position:relative;
-}
-
 object {
     width: 40em;
     max-width: 100%;
@@ -56,13 +51,12 @@ object {
     font-size: 65%;
 }
 
-.special button, .send button, .save button .switch button {
+.special button, .send button .switch button {
     text-shadow: 0.05em 0.05em 0.1em #462e22;
 }
 
 .special button { background-color: #a0795a; }
 .send button { background-color: #a4943c; }
-.save button { background-color: #ff943c; }
 
 .switch button {
     width: 3em;
@@ -84,7 +78,7 @@ object {
     font-size: 80%;
 }
 
-.config-color, .config-speed  {
+.config-color, .config-speed {
     display: flex;
     align-items: center;
 }

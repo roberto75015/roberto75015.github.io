@@ -1,7 +1,7 @@
 "use strict"
 /**
  * @file minitel-emulator.js
- * @author Frédéric BISSON <zigazou@free.fr> / modifé Minipavi
+ * @author Frédéric BISSON <zigazou@free.fr>
  * @version 1.0
  */
 
@@ -24,15 +24,13 @@ Minitel.Emulator = class {
         // Initializes basic properties
         const grid = new Minitel.TextGrid(Minitel.columns, Minitel.rows)
         const char = new Minitel.CharSize(Minitel.charWidth, Minitel.charHeight)
-		var searchPin;
-		var oMiniPaviWebMedia;
+
         // Look for all elements
         const elements = new Minitel.Elements()
         elements.add('screen')
                 .add('cursor')
                 .add('keyboard')
                 .add('beep')
-				//BOB//.add('minipaviwebmedia')
                 .foundIn(container)
 
         // The screen canvas is the only mandatory element
@@ -40,16 +38,7 @@ Minitel.Emulator = class {
             console.error("The emulator container has no canvas for screen.")
             return
         }
-		
-		//BOB//if (queryParameters("nowebmedia") !== undefined)
-			elements.minipaviwebmedia = undefined;
-		
-		if (elements.minipaviwebmedia === undefined) {
-			console.log("No minipaviwebmedia element found !");
-		} else {
-			console.log("minipaviwebmedia element found => starting MiniPaviWebMedia");
-			oMiniPaviWebMedia = new Minitel.MiniPaviWebMedia(container);
-		}
+
         // Resize canvas based on Minitel characteristics
         elements.screen.width = char.width * grid.cols
         elements.screen.height = char.height * grid.rows
@@ -65,7 +54,6 @@ Minitel.Emulator = class {
          * @member {boolean}
          */
         this.pause = false
-		
 
         /**
          * A handler which will be called to record frames.
@@ -115,30 +103,15 @@ Minitel.Emulator = class {
         this.socket = socketURL ? new WebSocket(socketURL) : undefined
 
         if(this.socket) {
-			//this.socket.binaryType = 'arraybuffer';
-			
+		//this.socket.binaryType = 'arraybuffer';
             this.socket.onopen = () => {
                 // Add a link: network → decoder
                 this.socket.onmessage = messageEvent => {
                     const message = []
-					
-					/*if (messageEvent.data.match("@") != null) {
-						console.log("BBT: "+messageEvent.data);
-					}*/
-					
-					if (elements.minipaviwebmedia !== undefined && elements.minipaviwebmedia.getAttribute("data-pin")=="" && messageEvent.data.length>10) {
-						if ((searchPin = messageEvent.data.match("\x14PIN:[0-9]{4}\x14")) != null) {
-							// PIN Minipavi trouvé
-							elements.minipaviwebmedia.setAttribute("data-pin",searchPin[0].substr(5,4));
-							console.log("Pin MiniPavi: "+elements.minipaviwebmedia.getAttribute("data-pin"));
-						}
-					}
-						
-					
                     range(messageEvent.data.length).forEach(offset => {
                         message.push(messageEvent.data[offset].charCodeAt(0))
                     })
-					//console.log('msg='+message);
+
                     this.send(message)
                 }
 
@@ -183,8 +156,6 @@ Minitel.Emulator = class {
          * @private
          */
         this.queue = []
-		
-		
 
         /**
          * How many bytes are sent to the page memory each refresh time
@@ -266,15 +237,12 @@ Minitel.Emulator = class {
 
         this.timer = window.setInterval(
             () => {
-				if(this.keyboard) {
-					if(this.keyboard.paused)  return
-					if(this.pause) return
+                if(this.pause) return
 
-					this.pause = true
-					this.sendChunk()
-					if(this.recordHandler) this.recordHandler(this.vdu.canvas, rate)
-					this.pause = false
-				}
+                this.pause = true
+                this.sendChunk()
+                if(this.recordHandler) this.recordHandler(this.vdu.canvas, rate)
+                this.pause = false
             },
             rate
         )
@@ -286,8 +254,6 @@ Minitel.Emulator = class {
      */
     send(items) {
         this.queue = this.queue.concat(items)
-		if(this.keyboard && this.keyboard.save) 
-			this.keyboard.saveArr = this.keyboard.saveArr.concat(items)
     }
 
     /**
@@ -381,12 +347,10 @@ Minitel.Emulator = class {
         switch(keyword.toUpperCase()) {
             case 'SOMMAIRE':
             case 'SOMM':
-			case 'SOMM.':
                 message = Minitel.keys.Videotex.Sommaire
                 break
             case 'ANNULATION':
             case 'ANNUL':
-			case 'ANNUL.':
                 message = Minitel.keys.Videotex.Annulation
                 break
             case 'RETOUR':
@@ -397,7 +361,6 @@ Minitel.Emulator = class {
                 break
             case 'CORRECTION':
             case 'CORR':
-			case 'CORR.':
                 message = Minitel.keys.Videotex.Correction
                 break
             case 'SUITE':
@@ -408,7 +371,6 @@ Minitel.Emulator = class {
                 break
             case 'REPETITION':
             case 'REPET':
-			case 'REPET.':
                 message = Minitel.keys.Videotex.Repetition
                 break
 

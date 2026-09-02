@@ -8,25 +8,14 @@
 	<meta http-equiv="Access-Control-Allow-Origin" content="*">
     <title>Emulateur Minitel</title>
     <link rel="stylesheet" href="css/minitel-keyboard.css" />
-	<!-- <link rel="stylesheet" href="css/minitel-minipavi-webmedia.css" /> -->
 	<link rel="stylesheet" href="css/crt.css" />
-	
 		
-    <meta name="keywords" content="MiniPavi, minitel, vintage, années 80, technologie, videotex, stum1b, teletel, 3615" />
-    <meta name="description" content="Créez votre services Minitel facilement! Voyagez dans le passé et aidez à la sauvergarde du patrimoine technologique !" />
-	<meta name="author" content="Jean-arthur Silve" />	
-	<meta property="og:type" content="website">
-	<meta property="og:site_name" content="MiniPAVI">
-	<meta property="og:description" content="Créez votre services Minitel facilement! Voyagez dans le passé et aidez à la sauvergarde du patrimoine technologique !">
-    <meta property="og:title" content="Accueil service MiniPAVI">
-	<meta property="og:url" content="http://www.minipavi.fr">
-
   </head>
   <body>
     <div>
 	<br/>
 	
-	<x-minitel id="emul-1" data-socket="wss://chatcafe.devs.surf:8182/"
+	<x-minitel id="emul-1" data-socket="ws://rmini:8183/"
 
                  data-speed="4800"
                  data-color="true">
@@ -34,12 +23,11 @@
 		<div id="oldeffect" class="minitel-oldeffect-off"   >
 			<canvas class="minitel-screen" data-minitel="screen"></canvas>
 			<canvas class="minitel-cursor" data-minitel="cursor"></canvas>
-			<div id="scanlines" class="minitel-scanlines"></div>
+			<div id="scanlines" class="minitel-scanlines-off"></div>
 			<div id="crt" class="minitel-crt-off"></div>
 		</div>
 		
 		
-				<!-- <import src="import/minitel-minipavi-webmedia.html"></import>		-->
         <import src="import/minitel-keyboard.html"></import>
 				
 		
@@ -58,13 +46,9 @@
 		</div>
 		
 		<font  style="font-size:14px;color:White;font-family:Arial,Helvetica">
+
 		<br/>
-					Après la connexion à un service, "Cnx/fin" pour revenir à la page d'accueil MiniPavi.
-			<br/>
-			(sauf en cas d'accès direct à un service)
-			<br/><br/>
-				Plus d'infos sur MiniPAVI - <a href="https://www.minipavi.fr/" style="color:white;" target="_blank">https://www.minipavi.fr/</a>
-		<br/>Emulateur Minitel Frédéric BISSON (version modifiée MiniPavi) - <a href="https://minitel.cquest.org/" style="color:white;" target="_blank">https://minitel.cquest.org/</a>
+		<br/>Emulateur Minitel Frédéric BISSON<a href="https://minitel.cquest.org/" style="color:white;" target="_blank">https://minitel.cquest.org/</a>
 		<br/><br/>
 		
 		</font>
@@ -121,7 +105,6 @@
     <script src="library/minitel/keyboard.js"></script>
     <script src="library/minitel/minitel-emulator.js"></script>
     <script src="library/minitel/start-emulators.js"></script>
-	<!-- <script src="library/minitel/minitel-minipavi-webmedia.js"></script> -->
 	
     <script src="app/minitel.js"></script>
 	
