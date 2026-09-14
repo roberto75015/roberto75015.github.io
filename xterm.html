@@ -1,0 +1,38 @@
+<!doctype html>
+  <html>
+    <head>
+      <title>Ansi terminal connected to ChatCafe'</title>
+      <link rel="stylesheet" href="node_modules/@xterm/xterm/css/xterm.css" />
+<link rel="stylesheet" href="css/minitel-keyboard.css" />
+<link rel="stylesheet" href="css/crt.css" />
+      <script src="node_modules/@xterm/xterm/lib/xterm.js"></script>
+      <script src="node_modules//@xterm/addon-attach/lib/addon-attach.js"></script>
+    </head>
+    <body>
+      <div id="terminal" style="width:max-content;margin-left:auto;margin-right:auto;"></div>
+      <div id="options" style="width:50%;margin-left:auto;margin-right:auto;">
+	<center>
+	<br/>
+	<div class="checkbox-wrapper-14">
+	  <input id="ansiColorSw" type="checkbox" class="switch" onchange="ansiColorSwChange(this.checked);">
+	  <label for="ansiColorSw">Minitel Emulator</label>
+	</div>
+	<font  style="font-size:14px;color:White;font-family:Arial,Helvetica">
+		<br/>Ansi Terminal by <a href="https://xtermjs.org/" style="color:white;" target="_blank">https://xtermjs.org/</a>
+		<br/><br/>
+	</font></center>
+</div>
+      <script>
+	function ansiColorSwChange(checked) {
+		if(checked)
+			window.location.replace("index.html");
+	}
+        const term = new Terminal( {cols:80, rows:25} );
+	const socket = new WebSocket("wss://chatcafe.devs.surf:8183/");
+	const addon = new AttachAddon.AttachAddon(socket);
+        term.open(document.getElementById('terminal'));
+        //term.write('Hello from \x1B[1;3;31mxterm.js\x1B[0m $ ')
+	term.loadAddon(addon);
+      </script>
+    </body>
+  </html>

@@ -36,8 +36,8 @@
 
 		<div style="display:flex;justify-content: space-evenly;">
 		<div class="checkbox-wrapper-14">
-		  <input id="oldminitelSw" type="checkbox" class="switch" onchange="oldMinitelChange('oldeffect','crt',this.checked);">
-		  <label for="oldminitelSw">Minitel fatigué &#128577;</label>
+		  <input id="ansiColorSw" type="checkbox" class="switch" onchange="ansiColorSwChange(this.checked);">
+		  <label for="ansiColorSw">Ansi Color</label>
 		</div>
 		<div class="checkbox-wrapper-14">
 		  <input id="scanlinesSw" type="checkbox" class="switch" onchange="scanlinesChange('scanlines',this.checked);" checked>
@@ -64,16 +64,9 @@
     </div>
 
 	<script>
-	function oldMinitelChange(id,id2, checked) {
-		var e1 = document.getElementById(id);
-		var e2 = document.getElementById(id2);
-		if (checked) {
-			e1.className='minitel-oldeffect';
-			e2.className='minitel-crt';
-		} else { 
-			e1.className='minitel-oldeffect-off';
-			e2.className='minitel-crt-off';
-		}
+	function ansiColorSwChange(checked) {
+		if(checked)
+			window.location.replace("xterm.html");
 	}
 	function scanlinesChange(id, checked) {
 		var e = document.getElementById(id);
