@@ -1,1 +1,1 @@
-include: [node_modules/, node_modules/.package-lock.json]
+include: ["node_modules"]
