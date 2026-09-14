@@ -27,7 +27,12 @@
 		if(checked)
 			window.location.replace("index.html");
 	}
-        const term = new Terminal( {cols:80, rows:25} );
+        const term = new Terminal( {
+			cols:80,
+			rows:25,
+			fontSize:24,
+			fontFamily: 'monospace'
+		} );
 	const socket = new WebSocket("wss://chatcafe.devs.surf:8183/");
 	const addon = new AttachAddon.AttachAddon(socket);
         term.open(document.getElementById('terminal'));
