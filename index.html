@@ -51,7 +51,7 @@
 
       </x-minitel>
 	<script>
-		if ( window.location.protocol == "https" )
+		if ( window.location.protocol == "https:" )
 			document.getElementById("emul-1").setAttribute("data-socket", "wss://chatcafe.devs.surf:8182/");
 		else
 			document.getElementById("emul-1").setAttribute("data-socket", "ws://rmini:8182/");
