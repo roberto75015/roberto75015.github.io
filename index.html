@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -14,16 +13,7 @@
   <body>
     <div>
 	<br/>
-	
-	<script>
-		window.onload = function() {
-			protocol = window.location.protocol;
-			if ( protocol == "http" )
-				document.getElementById("emul-1").setAttribute("data-socket", "ws://rmini:8182/");
-		}
-	</script>
-
-	<x-minitel id="emul-1" data-socket="wss://chatcafe.devs.surf:8182/" data-speed="4800" data-color="true">
+	<x-minitel id="emul-1" data-socket="" data-speed="4800" data-color="true">
 		<div id="oldeffect" class="minitel-oldeffect-off"   >
 			<canvas class="minitel-screen" data-minitel="screen"></canvas>
 			<canvas class="minitel-cursor" data-minitel="cursor"></canvas>
@@ -60,6 +50,12 @@
 
 
       </x-minitel>
+	<script>
+		if ( window.location.protocol == "https" )
+			document.getElementById("emul-1").setAttribute("data-socket", "wss://chatcafe.devs.surf:8182/");
+		else
+			document.getElementById("emul-1").setAttribute("data-socket", "ws://rmini:8182/");
+	</script>
     </div>
 
 	<script>
