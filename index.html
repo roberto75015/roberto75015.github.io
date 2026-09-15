@@ -15,23 +15,22 @@
     <div>
 	<br/>
 	
-	<x-minitel id="emul-1" data-socket="wss://chatcafe.devs.surf:8182/"
+	<script>
+		window.onload = function() {
+			protocol = window.location.protocol;
+			if ( protocol == "http" )
+				document.getElementById("emul-1").setAttribute("data-socket", "ws://rmini:8182/");
+		}
+	</script>
 
-                 data-speed="4800"
-                 data-color="true">
-		
+	<x-minitel id="emul-1" data-socket="wss://chatcafe.devs.surf:8182/" data-speed="4800" data-color="true">
 		<div id="oldeffect" class="minitel-oldeffect-off"   >
 			<canvas class="minitel-screen" data-minitel="screen"></canvas>
 			<canvas class="minitel-cursor" data-minitel="cursor"></canvas>
 			<div id="scanlines" class="minitel-scanlines-off"></div>
 			<div id="crt" class="minitel-crt-off"></div>
 		</div>
-		
-		
         <import src="import/minitel-keyboard.html"></import>
-				
-		
-				
 		<br/>
 
 		<div style="display:flex;justify-content: space-evenly;">

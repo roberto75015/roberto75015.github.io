@@ -33,7 +33,11 @@
 			fontSize:24,
 			fontFamily: 'monospace'
 		} );
-	const socket = new WebSocket("wss://chatcafe.devs.surf:8183/");
+	if ( window.location.protocol == "https" )
+		s = "wss://chatcafe.devs.surf:8183/";
+	else
+		s = "ws://rmini:8183/";
+	const socket = new WebSocket(s);
 	const addon = new AttachAddon.AttachAddon(socket);
         term.open(document.getElementById('terminal'));
         //term.write('Hello from \x1B[1;3;31mxterm.js\x1B[0m $ ')
